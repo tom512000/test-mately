@@ -17,7 +17,13 @@ export default function ProfileForm({ initialData, onSubmit, onClose, submitLabe
         }
     }, [initialData]);
 
-    // Gestion de la vérification de l'URL photo
+    /**
+     * Vérifie si une URL donnée est valide.
+     *
+     * @function
+     * @param {string} url - L'URL à valider.
+     * @returns {boolean} Retourne `true` si l'URL est valide, sinon `false`.
+     */
     function isValidUrl(url) {
         try {
             new URL(url);
@@ -28,7 +34,15 @@ export default function ProfileForm({ initialData, onSubmit, onClose, submitLabe
         }
     }
 
-    // Gestion de l'événement de soumission du formulaire
+    /**
+     * Gère l'événement de soumission du formulaire.
+     * Vérifie si la photo est une URL valide. Si ce n'est pas le cas, utilise une URL par défaut
+     * générée à partir du nom de l'utilisateur.
+     *
+     * @function
+     * @param {Event} e - L'événement de soumission du formulaire.
+     * @returns {void}
+     */
     function handleSubmit(e) {
         e.preventDefault();
         const validPhoto = isValidUrl(photo) ? photo : DEFAULT_AVATAR.concat("", name.replace(" ", "+"));

@@ -1,5 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+/**
+ * Génère un avatar aléatoire basé sur un prénom et un nom.
+ *
+ * Selon un choix aléatoire, soit un avatar est sélectionné avec un nombre aléatoire,
+ * soit un avatar est généré à partir du prénom et du nom fournis.
+ *
+ * @function
+ * @param {string} firstname - Le prénom de l'utilisateur.
+ * @param {string} lastname - Le nom de l'utilisateur.
+ * @returns {string} L'URL de l'avatar généré.
+ */
 function getRandomAvatar(firstname, lastname) {
     const randomChoice = Math.random();
 

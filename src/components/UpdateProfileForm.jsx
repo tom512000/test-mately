@@ -7,7 +7,13 @@ export default function UpdateProfileForm({ profile, onClose }) {
     // Gestion de la modification d'un profil
     const dispatch = useDispatch();
 
-    // Gestion de l'événement de soumission du formulaire
+    /**
+     * Gère la soumission du formulaire pour mettre à jour un profil existant.
+     *
+     * @function
+     * @param {Object} updatedProfileData - Les nouvelles données du profil à mettre à jour.
+     * @returns {void}
+     */
     function handleUpdate(updatedProfileData) {
         dispatch(updateProfile({ id: profile.id, ...updatedProfileData }));
         onClose();

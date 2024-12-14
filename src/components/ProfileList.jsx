@@ -12,6 +12,14 @@ export default function ProfileList() {
 
     // Gestion de l'affichage du menu du profil
     const [activeProfileId, setActiveProfileId] = useState(null);
+
+    /**
+     * Bascule la visibilité du menu du profil.
+     *
+     * @function
+     * @param {string} profileId - L'identifiant du profil pour lequel le menu doit être affiché ou masqué.
+     * @returns {void}
+     */
     function toggleVisibility(profileId) {
         if (activeProfileId === profileId) {
             setActiveProfileId(null);
@@ -22,15 +30,37 @@ export default function ProfileList() {
 
     // Gestion de l'affichage du formulaire de modification
     const [editingProfile, setEditingProfile] = useState(null);
+
+    /**
+     * Ferme le formulaire de modification du profil.
+     *
+     * @function
+     * @returns {void}
+     */
     function closeEditingForm() {
         setEditingProfile(null);
     }
 
     // Gestion de l'affichage de la fenêtre de suppression
     const [profileToDelete, setProfileToDelete] = useState(null);
+
+    /**
+     * Ferme la fenêtre de confirmation de suppression.
+     *
+     * @function
+     * @returns {void}
+     */
     function closeDeleteConfirmation() {
         setProfileToDelete(null);
     }
+
+    /**
+     * Confirme et exécute la suppression du profil sélectionné.
+     * Si un profil est marqué pour suppression, l'action Redux `deleteProfile` est déclenchée.
+     *
+     * @function
+     * @returns {void}
+     */
     function confirmDeleteProfile() {
         if (profileToDelete) {
             dispatch(deleteProfile(profileToDelete));

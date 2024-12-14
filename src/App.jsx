@@ -4,8 +4,15 @@ import { PlusOutlined } from "@ant-design/icons";
 import AddProfileForm from "./components/AddProfileForm";
 
 export default function App() {
-    // Gestion de l'affichage du formulaire de création
     const [isCreateFormOpen, setIsCreateFormOpen] = useState(false);
+
+    /**
+     * Inverse l'état de visibilité du formulaire de création.
+     * Si le formulaire est visible, il sera caché, et vice-versa.
+     *
+     * @function
+     * @returns {void}
+     */
     function toggleVisibility() {
         setIsCreateFormOpen(!isCreateFormOpen);
     }

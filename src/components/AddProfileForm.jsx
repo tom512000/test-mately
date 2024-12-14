@@ -7,7 +7,13 @@ export default function AddProfileForm({ closeFunction }) {
     // Gestion de la création d'un profil
     const dispatch = useDispatch();
 
-    // Gestion de l'événement de soumission du formulaire
+    /**
+     * Gère la soumission du formulaire pour ajouter un nouveau profil.
+     *
+     * @function
+     * @param {Object} profileData - Les données du nouveau profil à ajouter.
+     * @returns {void}
+     */
     function handleAdd(profileData) {
         dispatch(addProfile(profileData));
         closeFunction();
