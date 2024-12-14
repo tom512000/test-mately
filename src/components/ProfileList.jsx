@@ -23,7 +23,7 @@ export default function ProfileList() {
                     key={profile.id}
                     className="flex flex-col justify-center items-center p-6 border border-gray-200 bg-white rounded-lg relative"
                 >
-                    <div className="absolute top-2 right-3.5 z-50">
+                    <div className="absolute top-2 right-3.5 z-40">
                         <MoreOutlined rotate="90" className="text-xl" onClick={() => toggleVisibility(profile.id)} />
                         {activeProfileId === profile.id && (
                             <div className="absolute right-0 z-10 w-40 overflow-hidden bg-white border border-gray-300 rounded-md shadow-xl">
