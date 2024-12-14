@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { DeleteOutlined, MoreOutlined } from "@ant-design/icons";
+import { DeleteOutlined, EditOutlined, MoreOutlined } from "@ant-design/icons";
 import { deleteProfile } from "../store/slices/profiles.js";
+import UpdateProfileForm from "./UpdateProfileForm.jsx";
 
 export default function ProfileList() {
     const profiles = useSelector(state => state.profiles);
@@ -14,6 +15,12 @@ export default function ProfileList() {
         } else {
             setActiveProfileId(profileId);
         }
+    }
+
+    const [editingProfile, setEditingProfile] = useState(null);
+
+    function closeEditingForm() {
+        setEditingProfile(null);
     }
 
     return (
@@ -29,10 +36,20 @@ export default function ProfileList() {
                             <div className="absolute right-0 z-10 w-40 overflow-hidden bg-white border border-gray-300 rounded-md shadow-xl">
                                 <button
                                     type="button"
+                                    onClick={() => setEditingProfile(profile)}
+                                    className="w-full flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 group"
+                                >
+                                    <EditOutlined
+                                        className="bx bx-edit text-lg text-gray-800 group-hover:text-white mr-3"/>
+                                    <p className="font-poppins font-medium text-gray-800 group-hover:text-white">Modifier</p>
+                                </button>
+                                <button
+                                    type="button"
                                     onClick={() => dispatch(deleteProfile(profile.id))}
                                     className="w-full flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-red-400 group"
                                 >
-                                    <DeleteOutlined className="bx bx-edit text-lg text-gray-800 group-hover:text-white mr-3" />
+                                    <DeleteOutlined
+                                        className="bx bx-edit text-lg text-gray-800 group-hover:text-white mr-3"/>
                                     <p className="font-poppins font-medium text-gray-800 group-hover:text-white">Supprimer</p>
                                 </button>
                             </div>
@@ -43,6 +60,13 @@ export default function ProfileList() {
                     <p className="text-center text-sm font-poppins font-normal text-gray-400">{profile.description}</p>
                 </div>
             ))}
+            <div className="relative">
+                {editingProfile && (
+                    <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-50">
+                        <UpdateProfileForm profile={editingProfile} onClose={closeEditingForm} />
+                    </div>
+                )}
+            </div>
         </div>
     );
 }
