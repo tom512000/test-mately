@@ -6,6 +6,7 @@ export default function ProfileForm({ initialData, onSubmit, onClose, submitLabe
     const [photo, setPhoto] = useState(initialData?.photo || "");
     const [description, setDescription] = useState(initialData?.description || "");
 
+    // Gestion de la mise à jour des champs
     useEffect(() => {
         if (initialData) {
             setName(initialData.name);
@@ -14,6 +15,7 @@ export default function ProfileForm({ initialData, onSubmit, onClose, submitLabe
         }
     }, [initialData]);
 
+    // Gestion de l'événement de soumission du formulaire
     function handleSubmit(e) {
         e.preventDefault();
         onSubmit({ name, photo, description });

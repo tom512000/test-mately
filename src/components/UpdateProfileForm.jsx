@@ -4,8 +4,10 @@ import ProfileForm from "./ProfileForm";
 import PropTypes from "prop-types";
 
 export default function UpdateProfileForm({ profile, onClose }) {
+    // Gestion de la modification d'un profil
     const dispatch = useDispatch();
 
+    // Gestion de l'événement de soumission du formulaire
     function handleUpdate(updatedProfileData) {
         dispatch(updateProfile({ id: profile.id, ...updatedProfileData }));
         onClose();

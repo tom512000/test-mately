@@ -1,13 +1,16 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { DeleteOutlined, EditOutlined, MoreOutlined } from "@ant-design/icons";
-import { deleteProfile } from "../store/slices/profiles.js";
-import UpdateProfileForm from "./UpdateProfileForm.jsx";
+import { deleteProfile } from "../store/slices/profiles";
+import UpdateProfileForm from "./UpdateProfileForm";
 
 export default function ProfileList() {
+    // Gestion du listage des profils
     const profiles = useSelector(state => state.profiles);
+    // Gestion de la suppression d'un profil
     const dispatch = useDispatch();
 
+    // Gestion de l'affichage du menu du profil
     const [activeProfileId, setActiveProfileId] = useState(null);
     function toggleVisibility(profileId) {
         if (activeProfileId === profileId) {
@@ -17,8 +20,8 @@ export default function ProfileList() {
         }
     }
 
+    // Gestion de l'affichage du formulaire de modification
     const [editingProfile, setEditingProfile] = useState(null);
-
     function closeEditingForm() {
         setEditingProfile(null);
     }
@@ -39,8 +42,7 @@ export default function ProfileList() {
                                     onClick={() => setEditingProfile(profile)}
                                     className="w-full flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 group"
                                 >
-                                    <EditOutlined
-                                        className="bx bx-edit text-lg text-gray-800 group-hover:text-white mr-3"/>
+                                    <EditOutlined className="bx bx-edit text-lg text-gray-800 group-hover:text-white mr-3" />
                                     <p className="font-poppins font-medium text-gray-800 group-hover:text-white">Modifier</p>
                                 </button>
                                 <button
@@ -48,14 +50,13 @@ export default function ProfileList() {
                                     onClick={() => dispatch(deleteProfile(profile.id))}
                                     className="w-full flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-red-400 group"
                                 >
-                                    <DeleteOutlined
-                                        className="bx bx-edit text-lg text-gray-800 group-hover:text-white mr-3"/>
+                                    <DeleteOutlined className="bx bx-edit text-lg text-gray-800 group-hover:text-white mr-3" />
                                     <p className="font-poppins font-medium text-gray-800 group-hover:text-white">Supprimer</p>
                                 </button>
                             </div>
                         )}
                     </div>
-                    <img src={profile.photo} alt={profile.name} className="w-20 h-20 mb-3 rounded-full shadow-lg"/>
+                    <img src={profile.photo} alt={profile.name} className="w-20 h-20 mb-3 rounded-full shadow-lg" />
                     <h2 className="text-2xl font-poppins font-semibold text-gray-900">{profile.name}</h2>
                     <p className="text-center text-sm font-poppins font-normal text-gray-400">{profile.description}</p>
                 </div>

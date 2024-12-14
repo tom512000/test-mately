@@ -4,8 +4,10 @@ import ProfileForm from "./ProfileForm";
 import PropTypes from "prop-types";
 
 export default function AddProfileForm({ closeFunction }) {
+    // Gestion de la création d'un profil
     const dispatch = useDispatch();
 
+    // Gestion de l'événement de soumission du formulaire
     function handleAdd(profileData) {
         dispatch(addProfile(profileData));
         closeFunction();

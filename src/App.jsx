@@ -4,8 +4,8 @@ import { PlusOutlined } from "@ant-design/icons";
 import AddProfileForm from "./components/AddProfileForm";
 
 export default function App() {
+    // Gestion de l'affichage du formulaire de création
     const [isCreateFormOpen, setIsCreateFormOpen] = useState(false);
-
     function toggleVisibility() {
         setIsCreateFormOpen(!isCreateFormOpen);
     }
@@ -28,7 +28,7 @@ export default function App() {
                     </div>
                 )}
             </div>
-            <ProfileList/>
+            <ProfileList />
         </>
     );
 }
