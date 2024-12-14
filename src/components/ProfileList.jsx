@@ -26,6 +26,18 @@ export default function ProfileList() {
         setEditingProfile(null);
     }
 
+    // Gestion de l'affichage de la fenêtre de suppression
+    const [profileToDelete, setProfileToDelete] = useState(null);
+    function closeDeleteConfirmation() {
+        setProfileToDelete(null);
+    }
+    function confirmDeleteProfile() {
+        if (profileToDelete) {
+            dispatch(deleteProfile(profileToDelete));
+            setProfileToDelete(null);
+        }
+    }
+
     return (
         <div className="w-full mt-3 grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4">
             {profiles.map(profile => (
@@ -47,7 +59,7 @@ export default function ProfileList() {
                                 </button>
                                 <button
                                     type="button"
-                                    onClick={() => dispatch(deleteProfile(profile.id))}
+                                    onClick={() => setProfileToDelete(profile.id)}
                                     className="w-full flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-red-400 group"
                                 >
                                     <DeleteOutlined className="bx bx-edit text-lg text-gray-800 group-hover:text-white mr-3" />
@@ -65,6 +77,32 @@ export default function ProfileList() {
                 {editingProfile && (
                     <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-50">
                         <UpdateProfileForm profile={editingProfile} onClose={closeEditingForm} />
+                    </div>
+                )}
+            </div>
+            <div className="relative">
+                {profileToDelete && (
+                    <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-50">
+                        <div className="bg-white p-6 rounded shadow-lg">
+                            <h2 className="text-lg font-poppins font-semibold text-gray-900 mb-4">Confirmation de suppression</h2>
+                            <p className="text-sm font-poppins text-gray-600 mb-6">Êtes-vous sûr de vouloir supprimer ce profil ? Cette action est irréversible.</p>
+                            <div className="flex justify-end space-x-4">
+                                <button
+                                    type="button"
+                                    onClick={closeDeleteConfirmation}
+                                    className="flex items-center rounded-md bg-slate-800 py-2 px-4 mr-3 border border-transparent text-center text-sm font-parkinsans text-white transition-all shadow-sm hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700"
+                                >
+                                    Annuler
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={confirmDeleteProfile}
+                                    className="flex items-center rounded-md border border-slate-300 py-2 px-4 text-center text-sm font-parkinsans transition-all shadow-sm hover:shadow-lg text-slate-600 hover:text-white hover:bg-slate-800 hover:border-slate-800"
+                                >
+                                    Supprimer
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 )}
             </div>
