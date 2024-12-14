@@ -6,6 +6,8 @@ export default function ProfileForm({ initialData, onSubmit, onClose, submitLabe
     const [photo, setPhoto] = useState(initialData?.photo || "");
     const [description, setDescription] = useState(initialData?.description || "");
 
+    const DEFAULT_AVATAR = "https://avatar.iran.liara.run/username?username=";
+
     // Gestion de la mise à jour des champs
     useEffect(() => {
         if (initialData) {
@@ -15,10 +17,23 @@ export default function ProfileForm({ initialData, onSubmit, onClose, submitLabe
         }
     }, [initialData]);
 
+    // Gestion de la vérification de l'URL photo
+    function isValidUrl(url) {
+        try {
+            new URL(url);
+            return true;
+            // eslint-disable-next-line no-unused-vars
+        } catch (_) {
+            return false;
+        }
+    }
+
     // Gestion de l'événement de soumission du formulaire
     function handleSubmit(e) {
         e.preventDefault();
-        onSubmit({ name, photo, description });
+        const validPhoto = isValidUrl(photo) ? photo : DEFAULT_AVATAR.concat("", name.replace(" ", "+"));
+        console.log(validPhoto);
+        onSubmit({ name, photo: validPhoto, description });
     }
 
     return (
