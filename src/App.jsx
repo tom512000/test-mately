@@ -1,9 +1,10 @@
-import React from "react";
+import ProfileList from "./components/ProfileList";
 
 export default function App() {
     return (
         <div>
-            <p>test</p>
+            <h1>Gestion des Profils</h1>
+            <ProfileList/>
         </div>
     );
 }
